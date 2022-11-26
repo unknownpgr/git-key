@@ -7,5 +7,10 @@
   "bin": "cli.js",
   "dependencies": {
     "yargs": "^17.6.2"
-  }
+  },
+  "keywords": [
+    "password",
+    "git",
+    "encryption"
+  ]
 }
