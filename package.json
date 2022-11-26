@@ -5,8 +5,17 @@
   "main": "index.js",
   "license": "MIT",
   "bin": "cli.js",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^18.11.9",
+    "@types/yargs": "^17.0.14",
+    "typescript": "^4.9.3"
   },
   "keywords": [
     "password",
