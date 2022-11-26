@@ -1,4 +1,13 @@
 {
   "name": "Git-Key",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:16-bullseye"
+"image": "mcr.microsoft.com/devcontainers/typescript-node:16-bullseye",
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"esbenp.prettier-vscode",
+			"streetsidesoftware.code-spell-checker",
+			"mhutchie.git-graph"
+		]
+	}
+}
 }
