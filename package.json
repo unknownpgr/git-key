@@ -1,5 +1,5 @@
 {
-  "name": "gitkey",
+  "name": "@unknownpgr/git-key",
   "version": "1.0.0",
   "description": "Solution for safely tracking secrets in git.",
   "main": "index.js",
