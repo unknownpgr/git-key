@@ -112,11 +112,11 @@ export async function cli() {
 
   switch (command) {
     case "hide":
-      console.log(hide());
+      console.log(await hide());
       break;
 
     case "clear":
-      clear();
+      await clear();
       break;
 
     case "reveal":
@@ -125,7 +125,7 @@ export async function cli() {
         (argv.password as string) ||
         process.env.GIT_KEY_PASSWORD ||
         "";
-      reveal(password);
+      await reveal(password);
       break;
 
     default:
