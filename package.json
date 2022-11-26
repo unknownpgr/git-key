@@ -1,7 +1,11 @@
 {
   "name": "git-key",
   "version": "1.0.0",
-  "description": "Solution for safly tracking secrets in git.",
+  "description": "Solution for safely tracking secrets in git.",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": "cli.js",
+  "dependencies": {
+    "yargs": "^17.6.2"
+  }
 }
