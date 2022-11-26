@@ -1,0 +1,7 @@
+{
+  "name": "git-key",
+  "version": "1.0.0",
+  "description": "Solution for safly tracking secrets in git.",
+  "main": "index.js",
+  "license": "MIT"
+}
