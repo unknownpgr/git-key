@@ -66,9 +66,7 @@ export async function clear() {
       try {
         await fs.unlink(secretFile);
         log(`  ${secretFile}`);
-      } catch {
-        console.error(`Cannot create ${secretFile}`);
-      }
+      } catch {}
     })
   );
 }
@@ -108,18 +106,22 @@ export async function cli() {
   const argv = await yargs(hideBin(process.argv)).argv;
   const command = argv._[0] as string;
 
-  if (argv.v || argv.verbose) verbose = true;
+  if (argv.v || argv.verbose || process.env.VERBOSE) verbose = true;
 
   switch (command) {
-    case "hide":
-      console.log(await hide());
+    case "hide": {
+      const password = await hide();
+      log("Password :");
+      console.log(password);
       break;
+    }
 
-    case "clear":
+    case "clear": {
       await clear();
       break;
+    }
 
-    case "reveal":
+    case "reveal": {
       const password =
         (argv.p as string) ||
         (argv.password as string) ||
@@ -127,8 +129,10 @@ export async function cli() {
         "";
       await reveal(password);
       break;
+    }
 
     default:
+      console.error(`No such command exists : ${command}`);
       break;
   }
 }
