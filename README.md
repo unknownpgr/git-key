@@ -13,8 +13,8 @@ You can track secrets in git.
    src/my-secrets.json
    .env
    ```
-3. Run `yarn git-key hide` to encrypt secret files. `.secrets.encrypted` file containing all secret file will be created, and a password for decryption will be displayed. This password is randomly generated. If you lost the password, **there are no way of restoring secrets**.
-4. Now you can delete secret files. To delete all secret files listed in `.secrets`, run `yarn git-key clear`.
+3. Run `yarn git-key hide` to encrypt secret files. Then, `.secrets.encrypted` file containing all secret files will be created, and a password for decryption will be displayed. This password is randomly generated. If you lose the password, **there is no way to restore secrets.**
+4. Now you can delete secret files. Running `yarn git-key clear` will delete all secret files listed in `.secrets`.
 5. To restore secret files, run `yarn git-key reveal -p PASSWORD_FROM_GIT_KEY_HIDE`.
 
 Below is a scenario of using git-key.
