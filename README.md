@@ -36,3 +36,15 @@ $ cat .env
 PASSWORD=Very sensitive password
 $
 ```
+
+## Docs
+
+`yarn git-key hide` : Encrypt secret files and return password
+`yarn git-key clear` : Clear all files listed in `.secrets` file
+`yarn git-key reveal [-p|--password] PASSWORD` : Restore secret files with password
+
+> When using `git-key reveal`, password can be supplied by `GIT_KEY_PASSWORD` environment variable.
+
+### Options
+
+`-v` : Print logs
