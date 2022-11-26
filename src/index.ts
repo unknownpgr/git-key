@@ -54,7 +54,8 @@ export async function hide() {
     encrypted,
   });
   await fs.writeFile(SECRET_ENCRYPTED_FILE, encryptedFile, "utf-8");
-  console.log(password.toString("base64"));
+
+  return password.toString("base64");
 }
 
 export async function clear() {
@@ -111,7 +112,7 @@ export async function cli() {
 
   switch (command) {
     case "hide":
-      hide();
+      console.log(hide());
       break;
 
     case "clear":
