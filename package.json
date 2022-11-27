@@ -5,6 +5,11 @@
   "main": "index.js",
   "license": "MIT",
   "bin": "cli.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unknownpgr/git-key"
+  },
+  "homepage": "https://github.com/unknownpgr/git-key",
   "scripts": {
     "build": "tsc",
     "test": "jest"
