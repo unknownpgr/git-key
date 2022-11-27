@@ -1,6 +1,6 @@
 {
   "name": "@unknownpgr/git-key",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Solution for safely tracking secrets in git.",
   "main": "index.js",
   "license": "MIT",
