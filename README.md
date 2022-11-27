@@ -1,5 +1,9 @@
 # @unknownpgr/git-key
 
+<center>
+<img src="./git-key-logo.png" width="80%"/>
+</center>
+
 Fast, simple, minimalist secret management CLI tool.
 
 You can track secrets in git.
