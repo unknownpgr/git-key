@@ -39,11 +39,11 @@ $
 
 ## Docs
 
-`yarn git-key hide` : Encrypt secret files and return password
-`yarn git-key clear` : Clear all files listed in `.secrets` file
-`yarn git-key reveal [-p|--password] PASSWORD` : Restore secret files with password
+- `yarn git-key hide` : Encrypt secret files and return password
+- `yarn git-key clear` : Clear all files listed in `.secrets` file
+- `yarn git-key reveal [-p|--password] PASSWORD` : Restore secret files with password
 
-> When using `git-key reveal`, password can be supplied by `GIT_KEY_PASSWORD` environment variable.
+> When using `git-key reveal`, password can be supplied by `GIT_KEY_PASSWORD` environment variable. If both env variable and command line parameter are supplied, command line parameter will be used.
 
 ### Options
 
