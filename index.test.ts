@@ -1,6 +1,6 @@
-const mock = require("mock-fs");
-const fs = require("fs/promises");
-const { hide, clear, reveal } = require("./lib");
+import mock from "mock-fs";
+import fs from "fs/promises";
+import { hide, clear, reveal } from "./lib";
 
 const TEST_FILE_PATH = ".env";
 const TEST_FILE_CONTENT = "PASSWORD=VERY_SENSITIVE_PASSWORD";

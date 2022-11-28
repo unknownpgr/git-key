@@ -27,7 +27,7 @@ async function getSecretFiles(): Promise<string[]> {
 
 export async function hide(encryptedFileName: string = SECRET_ENCRYPTED_FILE) {
   const secretFiles = await getSecretFiles();
-  if (secretFiles.length === 0) return;
+  if (secretFiles.length === 0) throw new Error("Secret file is empty.");
 
   const secrets: { [k: string]: string } = {};
   log("Encrypt file");
