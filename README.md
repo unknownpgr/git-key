@@ -19,7 +19,7 @@ You can track secrets in git.
    ```
 3. Run `yarn git-key hide` to encrypt secret files. Then, `.secrets.encrypted` file containing all secret files will be created, and a password for decryption will be displayed. This password is randomly generated. If you lose the password, **there is no way to restore secrets.**
 4. Now you can delete secret files. Running `yarn git-key clear` will delete all secret files listed in `.secrets`.
-5. To restore secret files, run `yarn git-key reveal -p PASSWORD_FROM_GIT_KEY_HIDE`.
+5. To restore secret files, run `yarn git-key reveal -p <PASSWORD_FROM_GIT_KEY_HIDE>`.
 
 Below is a scenario of using git-key.
 
@@ -43,12 +43,15 @@ $
 
 ## Docs
 
-- `yarn git-key hide` : Encrypt secret files and return password
-- `yarn git-key clear` : Clear all files listed in `.secrets` file
-- `yarn git-key reveal [-p|--password] PASSWORD` : Restore secret files with password
+- `yarn git-key hide [-v] [-n | --filename <encrypted file name>]` : Encrypt secret files and return password
+- `yarn git-key clear [-v]` : Remove all files listed in `.secrets` file
+- `yarn git-key reveal [-v] [-n | --filename <encrypted file name>] [-p|--password <PASSWORD>]` : Restore secret files with password. If password is not supplied, `GIT_KEY_PASSWORD` environment variable will be used.
 
-> When using `git-key reveal`, password can be supplied by `GIT_KEY_PASSWORD` environment variable. If both env variable and command line parameter are supplied, command line parameter will be used.
+> - Password can be supplied by `GIT_KEY_PASSWORD` environment variable.
+> - File name can be supplied by `GIT_KEY_ENCRYPTED_FILE` environment variable
+> - If both environment variable and command line parameter are supplied, command line parameter will be used.
 
 ### Options
 
-`-v` : Print logs
+- `-n` : Encrypted file name. Default value is `.secrets.encrypted`
+- `-v` : Print logs. Default value is false.

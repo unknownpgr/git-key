@@ -3,8 +3,8 @@ import crypto from "crypto";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
-const SECRET_LIST_FILE = ".secrets";
 const SECRET_ENCRYPTED_FILE = ".secrets.encrypted";
+const SECRET_LIST_FILE = ".secrets";
 let verbose = false;
 
 function log(message: string) {
@@ -25,7 +25,7 @@ async function getSecretFiles(): Promise<string[]> {
   }
 }
 
-export async function hide() {
+export async function hide(encryptedFileName: string = SECRET_ENCRYPTED_FILE) {
   const secretFiles = await getSecretFiles();
   if (secretFiles.length === 0) return;
 
@@ -53,7 +53,7 @@ export async function hide() {
     iv: iv.toString("base64"),
     encrypted,
   });
-  await fs.writeFile(SECRET_ENCRYPTED_FILE, encryptedFile, "utf-8");
+  await fs.writeFile(encryptedFileName, encryptedFile, "utf-8");
 
   return password.toString("base64");
 }
@@ -71,14 +71,17 @@ export async function clear() {
   );
 }
 
-export async function reveal(password: string) {
+export async function reveal(
+  password: string,
+  encryptedFileName: string = SECRET_ENCRYPTED_FILE
+) {
   let encryptedFile;
   try {
-    encryptedFile = await fs.readFile(SECRET_ENCRYPTED_FILE, {
+    encryptedFile = await fs.readFile(encryptedFileName, {
       encoding: "utf-8",
     });
   } catch {
-    console.error(`Cannot find '${SECRET_ENCRYPTED_FILE}' file.`);
+    console.error(`Cannot find '${encryptedFileName}' file.`);
     return;
   }
 
@@ -107,10 +110,13 @@ export async function cli() {
   const command = argv._[0] as string;
 
   if (argv.v || argv.verbose || process.env.VERBOSE) verbose = true;
+  const encryptedFileName =
+    ((argv.n || argv.filename) as string | undefined) ||
+    process.env.GIT_KEY_ENCRYPTED_FILE;
 
   switch (command) {
     case "hide": {
-      const password = await hide();
+      const password = await hide(encryptedFileName);
       log("Password :");
       console.log(password);
       break;
@@ -127,7 +133,7 @@ export async function cli() {
         (argv.password as string) ||
         process.env.GIT_KEY_PASSWORD ||
         "";
-      await reveal(password);
+      await reveal(password, encryptedFileName);
       break;
     }
 
