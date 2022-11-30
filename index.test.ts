@@ -30,9 +30,17 @@ test("hide / reveal with encrypted file name", async () => {
   expect(files).toContain(encryptedFileName);
   await fs.stat(encryptedFileName);
   await fs.unlink(TEST_FILE_PATH);
-  await reveal(password, encryptedFileName);
+  await reveal(password);
   await fs.stat(TEST_FILE_PATH);
   expect(await fs.readFile(TEST_FILE_PATH, "utf-8")).toBe(TEST_FILE_CONTENT);
+});
+
+test("clear", async () => {
+  let files = await fs.readdir(".");
+  expect(files).toContain(TEST_FILE_PATH);
+  await clear();
+  files = await fs.readdir(".");
+  expect(files).not.toContain(TEST_FILE_PATH);
 });
 
 afterEach(() => {

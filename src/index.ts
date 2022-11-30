@@ -55,7 +55,14 @@ export async function hide(encryptedFileName: string = SECRET_ENCRYPTED_FILE) {
   });
   await fs.writeFile(encryptedFileName, encryptedFile, "utf-8");
 
-  return password.toString("base64");
+  let encodedPassword = password.toString("base64");
+  if (encryptedFileName !== SECRET_ENCRYPTED_FILE) {
+    const encodedFileName = Buffer.from(encryptedFileName, "utf-8").toString(
+      "base64"
+    );
+    encodedPassword += ":" + encodedFileName;
+  }
+  return encodedPassword;
 }
 
 export async function clear() {
@@ -71,10 +78,17 @@ export async function clear() {
   );
 }
 
-export async function reveal(
-  password: string,
-  encryptedFileName: string = SECRET_ENCRYPTED_FILE
-) {
+export async function reveal(password: string) {
+  const [encodedPassword, encodedFileName] = password.split(":");
+  let encryptedFileName;
+  if (!encodedFileName) {
+    encryptedFileName = SECRET_ENCRYPTED_FILE;
+  } else {
+    encryptedFileName = Buffer.from(encodedFileName, "base64").toString(
+      "utf-8"
+    );
+  }
+
   let encryptedFile;
   try {
     encryptedFile = await fs.readFile(encryptedFileName, {
@@ -86,7 +100,7 @@ export async function reveal(
   }
 
   const { encrypted, iv } = JSON.parse(encryptedFile);
-  const _password = Buffer.from(password, "base64");
+  const _password = Buffer.from(encodedPassword, "base64");
   const decipher = crypto.createDecipheriv(
     "aes-256-cbc",
     _password,
@@ -133,7 +147,7 @@ export async function cli() {
         (argv.password as string) ||
         process.env.GIT_KEY_PASSWORD ||
         "";
-      await reveal(password, encryptedFileName);
+      await reveal(password);
       break;
     }
 
