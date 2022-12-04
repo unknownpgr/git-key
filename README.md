@@ -1,8 +1,6 @@
 # @unknownpgr/git-key
 
-<p align="center">
-<img src="./git-key-logo.png" width="80%"/>
-</p>
+<img src="./git-key-logo.png" style="width:80%; margin-left: 10%"/>
 
 Fast, simple, minimalist secret management CLI tool.
 
