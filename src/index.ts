@@ -1,8 +1,8 @@
-import fs from "fs/promises";
 import crypto from "crypto";
-import yargs from "yargs";
+import fs from "fs/promises";
 import { hideBin } from "yargs/helpers";
 import { promisify } from "util";
+import yargs from "yargs";
 
 const DEFAULT_SECRET_LIST_FILE = ".secrets";
 const DEFAULT_SALT = Buffer.from(
@@ -138,6 +138,10 @@ export async function reveal(password: string) {
   );
 }
 
+export async function nameOf(password: string) {
+  return getFileName(password);
+}
+
 export async function cli() {
   const argv = await yargs(hideBin(process.argv)).argv;
   const command = argv._[0] as string;
@@ -165,6 +169,17 @@ export async function cli() {
         "";
       await reveal(password);
       break;
+    }
+
+    case "nameof":
+    case "name": {
+      const password =
+        (argv.p as string) ||
+        (argv.password as string) ||
+        process.env.GIT_KEY_PASSWORD ||
+        "";
+      const nameOfPassword = await nameOf(password);
+      console.log(password);
     }
 
     default:

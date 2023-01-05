@@ -44,6 +44,7 @@ $
 - `yarn git-key hide [-v] [-p|--password <PASSWORD>]` : Encrypt secret files and return password.
 - `yarn git-key clear [-v]` : Remove all files listed in `.secrets` file
 - `yarn git-key reveal [-v] [-p|--password <PASSWORD>]` : Restore secret files with password. Notice that you do not have to provide encrypted file name. Encrypted file name will be retrieved from password.
+- `yarn git-key nameof|name [-v] [-p|--password <PASSWORD>]` : Get encrypted file name without restoring files.
 
 > - Password can be supplied by `GIT_KEY_PASSWORD` environment variable.
 > - If both environment variable and command line parameter are supplied, command line parameter will be used.
